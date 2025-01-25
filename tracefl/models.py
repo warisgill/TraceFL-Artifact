@@ -417,7 +417,7 @@ def global_model_eval(arch, global_net_dict, server_testdata, batch_size=32):
         #     batch_size=batch_size,
         # )[0]
         d = _test_cnn(global_net_dict["model"],
-                      test_data=server_testdata, device="cuda")
+                      test_data=server_testdata, device = "cpu")
     elif arch == "transformer":
         d = _test_transformer_model(
             {'model_dict': global_net_dict, 'test_data': server_testdata, 'batch_size': batch_size})

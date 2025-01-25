@@ -232,10 +232,13 @@ def run_training_simulation(cfg):
 
     # ds_dict["client2class"]
 
-    logging.info(f'Client to class mapping: {ds_dict["client2class"]}')
-    plot_label_distribution(ds_dict["client2class"], mdedical_dataset2labels(cfg.dataset.name), fname_type='without_flip')
+    # logging.info(f'Client to class mapping: {ds_dict["client2class"]}')
+    # plot_label_distribution(ds_dict["client2class"], mdedical_dataset2labels(cfg.dataset.name), fname_type='without_flip')
 
     logging.info(f'faulty clients: {cfg.faulty_clients_ids}')
+
+    _ = input("Press Enter to continue...")
+    
     if len(cfg.faulty_clients_ids) > 0:
         cfg.faulty_clients_ids = [f"{x}" for x in cfg.faulty_clients_ids]
         logging.info(f'Converting clients to faulty clients: {cfg.faulty_clients_ids}')
@@ -287,11 +290,15 @@ def run_training_simulation(cfg):
 @hydra.main(config_path="conf", config_name="base", version_base=None)
 def main(cfg) -> None:
     """Run the baseline."""
+    
 
     cfg.exp_key = set_exp_key(cfg)
-    if cfg.dry_run:
-        logging.info(f"DRY RUN: {cfg.exp_key}")
-        return
+    run_training_simulation(cfg)
+
+    
+    # if cfg.dry_run:
+    #     logging.info(f"DRY RUN: {cfg.exp_key}")
+    #     return
 
     # if cfg.do_training:
     #     # try:
@@ -302,29 +309,29 @@ def main(cfg) -> None:
     #     # time.sleep(1)
 
 
-    if cfg.do_provenance:
-        # multiprocessing.set_start_method('spawn')
-        logging.info("Running Provenance")
-        given_key_provenance(cfg)
-        # run_fed_debug_differential_testing(cfg)
+    # if cfg.do_provenance:
+    #     # multiprocessing.set_start_method('spawn')
+    #     logging.info("Running Provenance")
+    #     given_key_provenance(cfg)
+    #     # run_fed_debug_differential_testing(cfg)
 
-        # try:
-        #     given_key_provenance(cfg)
-        # except Exception as e:
-        #     logging.error(f"Error: {e}")
-        #     logging.error(f"Error in provenance experiment: {cfg.exp_key}")
+    #     # try:
+    #     #     given_key_provenance(cfg)
+    #     # except Exception as e:
+    #     #     logging.error(f"Error: {e}")
+    #     #     logging.error(f"Error in provenance experiment: {cfg.exp_key}")
         
     
-    # if cfg.do_full_cache_provenance:
-    #     run_full_cache_provenance(cfg)
+    # # if cfg.do_full_cache_provenance:
+    # #     run_full_cache_provenance(cfg)
 
-    if cfg.convert_cache_to_csv:
-        convert_cache_to_csv(Index(cfg.storage.dir + cfg.storage.results_cache_name))
-        logging.info("Converted cache to csv is done")
+    # if cfg.convert_cache_to_csv:
+    #     convert_cache_to_csv(Index(cfg.storage.dir + cfg.storage.results_cache_name))
+    #     logging.info("Converted cache to csv is done")
     
-    if cfg.plotting:
-        logging.info("Plotting results")
-        do_plotting()
+    # if cfg.plotting:
+    #     logging.info("Plotting results")
+    #     do_plotting()
 
 
 if __name__ == "__main__":

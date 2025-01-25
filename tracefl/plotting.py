@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import pandas as pd
 import seaborn as sns
-import scienceplots
 
 from scipy.signal import savgol_filter
 from pathvalidate import sanitize_filename

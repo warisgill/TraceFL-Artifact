@@ -1,39 +1,73 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["poetry-core>=1.4.0"]
+build-backend = "poetry.masonry.api"
 
-[project]
-name = "tracefl"
+[tool.poetry]
+name = "tracefl" # <----- Ensure it matches the name of your baseline directory containing all the source code
 version = "1.0.0"
-description = ""
+description = "Flower Baselines"
 license = "Apache-2.0"
-dependencies = [
-    "flwr[simulation]>=1.13.1",
-    "flwr-datasets[vision]>=0.3.0",
-    "torch==2.2.1",
-    "torchvision==0.17.1",
+authors = ["The Flower Authors <hello@flower.ai>"]
+readme = "README.md"
+homepage = "https://flower.ai"
+repository = "https://github.com/adap/flower"
+documentation = "https://flower.ai"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
 ]
 
-[tool.hatch.metadata]
-allow-direct-references = true
+[tool.poetry.dependencies]
+python = ">=3.9.0,<3.12.0"  # don't change this
+flwr = { extras = ["simulation"], version = "1.9.0" }
+hydra-core = "1.3.2" # don't change this
+torch = "2.2.2"
+torchvision = "0.17.2"
+flwr-datasets = "0.3.0"
+diskcache = "^5.6.3"
+evaluate = "^0.4.3"
+transformers = "^4.48.1"
+medmnist = "^3.0.2"
+pathvalidate = "^3.2.3"
 
-[project.optional-dependencies]
-dev = [
-    "isort==5.13.2",
-    "black==24.2.0",
-    "docformatter==1.7.5",
-    "mypy==1.8.0",
-    "pylint==3.2.6",
-    "flake8==5.0.4",
-    "pytest==6.2.4",
-    "pytest-watch==4.2.0",
-    "ruff==0.1.9",
-    "types-requests==2.31.0.20240125",
-]
+[tool.poetry.dev-dependencies]
+isort = "==5.13.2"
+black = "==24.2.0"
+docformatter = "==1.7.5"
+mypy = "==1.4.1"
+pylint = "==2.8.2"
+flake8 = "==3.9.2"
+pytest = "==6.2.4"
+pytest-watch = "==4.2.0"
+ruff = "==0.0.272"
+types-requests = "==2.27.7"
 
 [tool.isort]
-profile = "black"
-known_first_party = ["flwr"]
+line_length = 88
+indent = "    "
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
 
 [tool.black]
 line-length = 88
@@ -52,13 +86,9 @@ strict = false
 plugins = "numpy.typing.mypy_plugin"
 
 [tool.pylint."MESSAGES CONTROL"]
-disable = "duplicate-code,too-few-public-methods,useless-import-alias"
-good-names = "i,j,k,_,x,y,X,Y,K,N"
-max-args = 10
-max-attributes = 15
-max-locals = 36
-max-branches = 20
-max-statements = 55
+disable = "bad-continuation,duplicate-code,too-few-public-methods,useless-import-alias,too-many-locals,too-many-arguments,too-many-instance-attributes"
+good-names = "i,j,k,_,x,y,X,Y"
+signature-mutators = "hydra.main.main"
 
 [tool.pylint.typecheck]
 generated-members = "numpy.*, torch.*, tensorflow.*"
@@ -113,26 +143,3 @@ exclude = [
 
 [tool.ruff.pydocstyle]
 convention = "numpy"
-
-[tool.hatch.build.targets.wheel]
-packages = ["."]
-
-[tool.flwr.app]
-publisher = "waris"
-
-[tool.flwr.app.components]
-serverapp = "tracefl.server_app:app"
-clientapp = "tracefl.client_app:app"
-
-[tool.flwr.app.config]
-num-server-rounds = 3
-fraction-fit = 0.5
-local-epochs = 1
-
-[tool.flwr.federations]
-default = "local-simulation"
-
-[tool.flwr.federations.local-simulation]
-options.num-supernodes = 10
-options.backend.client-resources.num-cpus = 2
-options.backend.client-resources.num-gpus = 0.0

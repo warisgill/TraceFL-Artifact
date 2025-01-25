@@ -16,7 +16,7 @@ total_gpus: 1
 total_cpus: 12
 client_cpus: 1
 client_gpu: 0.1
-device: "cuda"
+device: "cpu"
 
 client:
     epochs: 2
