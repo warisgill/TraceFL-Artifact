@@ -139,8 +139,7 @@ def line_plot(axis, x, y, label, linestyle, linewidth=2):
     axis.plot(x, y, label=label, linestyle=linestyle, linewidth=linewidth)
 
 
-#     plt.tight_layout(pad=0.1, w_pad=0.1, h_pad=.1)
-#     _save_plot(fig, "text_image_audio_classification_results")
+
 
 def _save_plot(fig, filename_base):
     for ext in ['png', 'svg', 'pdf']:
