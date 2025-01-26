@@ -1,5 +1,5 @@
 ---
-title: TraceFL: Interpretability-Driven Debugging in Federated Learning via Neuron Provenance # TODO
+title: TraceFL Interpretability-Driven Debugging in Federated Learning via Neuron Provenance # TODO
 url: https://arxiv.org/pdf/2312.13632 # TODO: update with the link to your paper
 labels: [interpretability, Explainability, Transparency, Trustworthy, Healthcare, Clients Importance, Text Classification, Image Classificatoin] # TODO: please add between 4 and 10 single-word (maybe two-words) labels (e.g. system heterogeneity, image classification, asynchronous, weight sharing, cross-silo). Do not use "". Remove this comment once you are done.
 dataset: [cifar10, mnist, pathmnist, organamnist, dbpedia_14, yahoo_answers_topics] # TODO: list of datasets you include in your baseline. Do not use "". Remove this comment once you are done.
