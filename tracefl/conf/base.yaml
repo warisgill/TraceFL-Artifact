@@ -13,8 +13,8 @@ noise_multiplier: -1
 clipping_norm: -1
 
 total_gpus: 1
-total_cpus: 8
-client_cpus: 8
+total_cpus: 2
+client_cpus: 2
 client_gpu: 1
 device: "cpu" # "cpu" or "cuda"
 
