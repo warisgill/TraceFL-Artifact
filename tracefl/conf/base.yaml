@@ -51,14 +51,15 @@ data_dist:
 
 
 
-do_training: False
-do_provenance: False
-plotting: False
-do_full_cache_provenance: False
-dry_run: False
-convert_cache_to_csv: False
 
-enable_beta: True
+do_full_cache_provenance: false
+dry_run: false
+
+do_training: true
+do_provenance: true
+convert_cache_to_csv: true
+enable_beta: true
+plotting: true
 
 
     

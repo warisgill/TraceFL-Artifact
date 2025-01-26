@@ -373,7 +373,7 @@ def _run_and_save_prov_result_in_cache(cfg):
     logging.info(
         f"Provenance results saved for {cfg.exp_key}, avg provenance time per round: {avg_prov_time_per_round} seconds")
     logging.info(
-        f"Rebuttal Average provenance accuracy: {avg_prov_accuracy}")
+        f"Average provenance accuracy: {avg_prov_accuracy}")
 
 
 def _get_all_train_cfgs_from_train_cache(cache):
