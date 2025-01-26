@@ -1,11 +1,18 @@
 ## TraceFL: Localizing Responsible Clients in Federated Learning Systems
 
 
+
+Now you can run the `artifact.ipynb` (<a  target="_blank"  href="https://colab.research.google.com/github/warisgill/TraceFL-Artifact/artifact.ipynb"><img  src="https://colab.research.google.com/assets/colab-badge.svg"  alt="Open In Colab"/></a>). You can run notebooks containing `TraceFL` code.
+
+
 conda create --name tracefl python=3.10 -y
 conda activate tracefl
 pip install poetry
 poetry install
 mkdir logs
+
+
+
 
 
 The `.sh` scripts provided in this artifact can be used to regenerate any experiment results presented in the paper. The experiments cover various aspects of federated learning, including:
