@@ -5,53 +5,6 @@ labels: [interpretability, Explainability, Transparency, Trustworthy, Healthcare
 dataset: [cifar10, mnist, pathmnist, organamnist, dbpedia_14, yahoo_answers_topics] # TODO: list of datasets you include in your baseline. Do not use "". Remove this comment once you are done.
 ---
 
-> [!IMPORTANT]
-> This is the template for your `README.md`. Please fill-in the information in all areas with a :warning: symbol.
-> Please refer to the [Flower Baselines contribution](https://flower.ai/docs/baselines/how-to-contribute-baselines.html) and [Flower Baselines usage](https://flower.ai/docs/baselines/how-to-use-baselines.html) guides for more details.
-> Please complete the metadata section at the very top of this README. This generates a table at the top of the file that will facilitate indexing baselines.
-> Please remove this [!IMPORTANT] block once you are done with your `README.md` as well as all the `:warning:` symbols and the comments next to them.
-
-> [!IMPORTANT]
-> To help having all baselines similarly formatted and structured, we have included two scripts in `baselines/dev` that when run will format your code and run some tests checking if it's formatted.
-> These checks use standard packages such as `isort`, `black`, `pylint` and others. You as a baseline creator will need to install additional pacakges. These are already specified in the `pyproject.toml` of 
-> your baseline. Follow these steps:
-
-```bash
-# Create a python env
-pyenv virtualenv 3.10.14 tracefl
-
-# Activate it
-pyenv activate tracefl
-
-# Install project including developer packages
-# Note the `-e` this means you install it in editable mode 
-# so even if you change the code you don't need to do `pip install`
-# again. However, if you add a new dependency to `pyproject.toml` you
-# will need to re-run the command below
-pip install -e ".[dev]"
-
-# Even without modifying or adding new code, you can run your baseline
-# with the placeholder code generated when you did `flwr new`. If you
-# want to test this to familiarise yourself with how flower apps are
-# executed, execute this from the directory where you `pyproject.toml` is:
-flwr run .
-
-# At anypoint during the process of creating your baseline you can 
-# run the formatting script. For this do:
-cd .. # so you are in the `flower/baselines` directory
-
-# Run the formatting script (it will auto-correct issues if possible)
-./dev/format-baseline.sh tracefl
-
-# Then, if the above is all good, run the tests.
-./dev/test-baseline.sh tracefl
-```
-
-> [!IMPORTANT]
-> When you open a PR to get the baseline merged into the main Flower repository, the `./dev/test-baseline.sh` script will run. Only if test pass, the baseline can be merged. 
-> Some issues highlighted by the tests script are easier than others to fix. Do not hesitate in reaching out for help to us (e.g. as a comment in your PR) if you are stuck with these.
-> Before opening your PR, please remove the code snippet above as well all the [!IMPORTANT] message blocks. Yes, including this one.
-
 # TraceFL: Interpretability-Driven Debugging in Federated Learning via Neuron Provenance
 
 > [!NOTE] 
