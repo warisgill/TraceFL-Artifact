@@ -44,10 +44,10 @@ device=cuda # cpu, cuda, mps  # mps is only for M chip macs
 
 
 echo "      ****************** 2 Differential Privacy Experiments ******************"
-num_rounds=5
-num_clients=10
-clients_per_round=4
-dp_noise=0.012
+num_rounds=2
+num_clients=10 #100
+clients_per_round=2 #10
+dp_noise=0.001 #0.012
 dp_clip=15
 client_gpu=1
 python -m tracefl.main --multirun device=$device client_gpu=$client_gpu exp_key=DP-text model.name="openai-community/openai-gpt" dataset.name="dbpedia_14" num_clients=$num_clients num_rounds=$num_rounds clients_per_round=$clients_per_round dirichlet_alpha=0.3 noise_multiplier=$dp_noise clipping_norm=$dp_clip | tee -a logs/train_dp_exp_text.log
