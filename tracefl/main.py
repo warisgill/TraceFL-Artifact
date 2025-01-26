@@ -23,8 +23,8 @@ from tracefl.models import global_model_eval, initialize_model
 from tracefl.strategy import FedAvgSave
 from tracefl.utils import set_exp_key
 from tracefl.fl_provenance import given_key_provenance
-from tracefl.differential_testing import run_fed_debug_differential_testing
-from tracefl.plotting import do_plotting, convert_cache_to_csv, plot_label_distribution, plot_tracefl_configuration_results
+
+from tracefl.plotting import do_plotting, convert_cache_to_csv, plot_label_distribution, plot_tracefl_configuration_results, feddebug_comparison_table
 
 
 class FLSimulation:
@@ -210,7 +210,6 @@ def run_training_simulation(cfg):
 
     logging.info(f'faulty clients: {cfg.faulty_clients_ids}')
 
-
     if len(cfg.faulty_clients_ids) > 0:
         cfg.faulty_clients_ids = [f"{x}" for x in cfg.faulty_clients_ids]
         logging.info(
@@ -225,7 +224,6 @@ def run_training_simulation(cfg):
         logging.info(f'After Client to class mapping: {temp_client2class}')
         plot_label_distribution(temp_client2class, mdedical_dataset2labels(
             cfg.dataset.name), fname_type='flip')
-
 
     sim = FLSimulation(copy.deepcopy(cfg), train_cache)
     sim.set_server_data(ds_dict["server_testdata"])
@@ -270,8 +268,12 @@ def main(cfg) -> None:
     if cfg.do_provenance:
         logging.info("Running Provenance")
         given_key_provenance(cfg)
-        plot_tracefl_configuration_results(cfg)
-        # run_fed_debug_differential_testing(cfg)
+
+        if len(cfg.faulty_clients_ids) > 0:
+            feddebug_comparison_table(cfg)
+        else:
+            plot_tracefl_configuration_results(cfg)
+
 
     # if cfg.convert_cache_to_csv:
     #     prov_cache =  Index(cfg.storage.dir + cfg.storage.results_cache_name)

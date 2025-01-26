@@ -13,10 +13,10 @@ noise_multiplier: -1
 clipping_norm: -1
 
 total_gpus: 1
-total_cpus: 12
-client_cpus: 1
-client_gpu: 0.1
-device: "cpu"
+total_cpus: 8
+client_cpus: 8
+client_gpu: 1
+device: "cpu" # "cpu" or "cuda"
 
 client:
     epochs: 2

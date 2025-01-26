@@ -7,7 +7,7 @@ from scipy.ndimage import gaussian_filter1d
 import copy
 import logging
 from diskcache import Index
-
+from pathlib import Path
 
 # global abc
 abc = 0
@@ -144,6 +144,10 @@ def line_plot(axis, x, y, label, linestyle, linewidth=2):
 
 def _save_plot(fig, filename_base):
     for ext in ['png', 'svg', 'pdf']:
+        directory_path = Path(f"graphs/{ext}s")
+        if not directory_path.exists():
+            directory_path.mkdir(parents=True, exist_ok=True)
+            print(f"Directory '{directory_path}' created.")
         plt.savefig(f"graphs/{ext}s/{filename_base}.{ext}",
                     bbox_inches='tight', format=ext, dpi=600)
 
@@ -983,6 +987,29 @@ def get_experiment_results_as_dataframe(cfg):
 
     df = pd.DataFrame(each_round_prov_result)
     return df
+
+
+
+def feddebug_comparison_table(cfg):    
+    def _get_table_dict_dirichlet(df, alpha):
+        mname = _get_paper_name(df['Model'][0])
+        dname = _get_paper_name(df['Dataset'][0])
+
+        if mname.find('GPT') != -1:
+            return {'Model': mname, 'Dataset': dname, 'Dirichlet Distribution ($\\alpha$)': alpha,   'Avg. FedDebug Time (s)': "NA", 'Avg. TraceFL Time (s)': df['avg_prov_time_per_input'].mean(), 'FedDebug Accuracy': "NA",  'TraceFL Accuracy': df['Accuracy'].mean()*100}
+
+        else:
+            return {'Model': mname, 'Dataset': dname, 'Dirichlet Distribution ($\\alpha$)': alpha,   'Avg. FedDebug Time (s)': df['FedDebug avg_fault_localization_time'].mean(), 'Avg. TraceFL Time (s)': df['avg_prov_time_per_input'].mean(), 'FedDebug Accuracy': df['FedDebug Accuracy'].mean(),  'TraceFL Accuracy': df['Accuracy'].mean()*100}
+
+    comparison_df = get_experiment_results_as_dataframe(cfg)
+    comparison_dict  =  _get_table_dict_dirichlet(comparison_df, alpha=cfg.dirichlet_alpha)
+
+    df = pd.DataFrame([comparison_dict]) 
+    print(df)
+    
+
+    
+
 
 
 def plot_tracefl_configuration_results(cfg):

@@ -9,7 +9,6 @@ from tracefl.models import test_neural_network
 from tracefl.neuron_provenance import NeuronProvenance
 import torch 
 from tracefl.differential_testing import round_lambda_fed_debug_func
-from joblib import Parallel, delayed
 
 class FederatedProvFalse(FederatedProvTrue):
     def __init__(self, cfg, round_key, central_test_data, t=None):
