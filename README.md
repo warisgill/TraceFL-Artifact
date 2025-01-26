@@ -2,7 +2,7 @@
 
 
 
-Now you can run the `artifact.ipynb` (<a  target="_blank"  href="https://colab.research.google.com/github/warisgill//blob/main/TraceFL-Artifact/artifact.ipynb"><img  src="https://colab.research.google.com/assets/colab-badge.svg"  alt="Open In Colab"/></a>). You can run notebooks containing `TraceFL` code.
+Now you can run the `artifact.ipynb` (<a  target="_blank"  href="https://colab.research.google.com/github/warisgill/TraceFL-Artifact/blob/main/artifact.ipynb"><img  src="https://colab.research.google.com/assets/colab-badge.svg"  alt="Open In Colab"/></a>). You can run notebooks containing `TraceFL` code.
 
 
 conda create --name tracefl python=3.10 -y
